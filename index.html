@@ -1,11 +1,18 @@
 <html>
     <head>
-        <title>Hero Party Selection</title>
+        <title>Hero Party</title>
         <link rel="stylesheet" href="/assets/styles.css" />
         <script src="/dist/main.js" defer></script>
     </head>
     <body>
-        <h1>Hero Party!</h1>
+        <div class="heading">
+            <h1>Hero Party Creator</h1>
+            <div class="css-typing">
+                <p>Guildmaster, you've arrived late... We trust you'll create the best 5-hero party for the trials that await us.</p>
+                <p>We've put together an initial party but we need your help to make it better. Remember to account for each hero's base skills.</p>
+                <p>Thank you!</p>
+            </div>
+        </div>
         <form>
             <label for="name">Name</label><br>
             <input type="text" id="name" name="name"><br>
@@ -16,6 +23,6 @@
         <div id="warning"></div>
         <ul id="hero-list"></ul>
         <ul id="party-list"></ul>
-        <small>Characters were made using application <a href="https://www.avatarsinpixels.com/">Minipix Maker</a></small>
+        <small>Pixel character models were created using application <a href="https://www.avatarsinpixels.com/">Minipix Maker</a></small>
     </body>
 </html>

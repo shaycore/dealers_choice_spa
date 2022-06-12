@@ -13,7 +13,7 @@ heroForm.addEventListener('submit', async(ev)=> {
     const name = input.value;
     const role = dropdown.value;
     const partySize = state.heroes.length;
-    const maxPartySize = 10;
+    const maxPartySize = 5;
     try {
         if (partySize < maxPartySize) {
             await axios.post('/api/heroes', {
@@ -61,8 +61,18 @@ const renderHeroes = ()=> {
         return `
             <li>
                 <img src="/assets/${ role.name }.png" class="role-img">
-                ${ hero.name } - ${ role.name } || ${ hero.roleId }
-                <button data-id='${ hero.id }'>Remove From Party</button>
+                Name: ${ hero.name }
+                <div class="tooltip">Role: <b>${ role.name }</b>
+                    <span class="tooltiptext">
+                        <b>Base Stats</b>: <br>
+                        Attack: ${ role.attack }<br>
+                        Defense: ${ role.defense }<br>
+                        Agility: ${ role.agility }<br>
+                        Magic: ${ role.magic }<br>
+                        Intelligence: ${ role.intelligence }
+                    </span>
+                </div>
+                <button data-id='${ hero.id }'>Kick From Party</button>
             </li>
         `;
     }).join('');

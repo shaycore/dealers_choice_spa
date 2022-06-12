@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { STRING, ENUM } = Sequelize;
+const { STRING, ENUM, INTEGER } = Sequelize;
 
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/dealers_choice_spa_db');
 
@@ -22,6 +22,26 @@ const Role = conn.define('role', {
         validate: {
           notEmpty: true
         }
+    },
+    attack: {
+        type: INTEGER,
+        defaultValue: 5
+    },
+    defense: {
+        type: INTEGER,
+        defaultValue: 5
+    },
+    agility: {
+        type: INTEGER,
+        defaultValue: 5
+    },
+    magic: {
+        type: INTEGER,
+        defaultValue: 5
+    },
+    intelligence: {
+        type: INTEGER,
+        defaultValue: 5
     }
 });
 
@@ -29,22 +49,24 @@ Hero.belongsTo(Role);
 
 const syncAndSeed = async() => {
     await conn.sync({ force: true });
-    const [ adventurer, angel, assassin, demon, elf, tank, wizard ] = await Promise.all([
-        Role.create({ name: 'Adventurer' }),
-        Role.create({ name: 'Angel' }),
-        Role.create({ name: 'Assassin' }),
-        Role.create({ name: 'Demon' }),
-        Role.create({ name: 'Elf' }),
-        Role.create({ name: 'Tank' }),
-        Role.create({ name: 'Vampire' }),
-        Role.create({ name: 'Wizard' })
+    const [ adventurer, angel, assassin, demon, elf, tank, vampire, cleric, ogre, hunter  ] = await Promise.all([
+        Role.create({ name: 'Adventurer', attack: 7, defense: 7, agility: 6 }),
+        Role.create({ name: 'Angel', agility: 9, magic: 8, attack: 2 }),
+        Role.create({ name: 'Assassin', agility: 10, defense: 2, attack: 6 }),
+        Role.create({ name: 'Demon', attack: 10, magic: 8, defense: 1 }),
+        Role.create({ name: 'Elf', magic: 8, attack: 4, defense: 6, intelligence: 8 }),
+        Role.create({ name: 'Tank', attack: 10, defense: 10, agility: 2, intelligence: 2, magic: 1 }),
+        Role.create({ name: 'Vampire', attack: 9, agility: 8, defense: 3 }),
+        Role.create({ name: 'Cleric', magic: 8, defense: 10, intelligence: 8, attack: 2, agility: 2 }),
+        Role.create({ name: 'Ogre', agility: 3, magic: 7, attack: 8 }),
+        Role.create({ name: 'Hunter', agility: 8, attack: 7, defense: 2, intelligence: 7 })
     ]);
     const [ kyrue, cree, raphael, hyojin, Hank] = await Promise.all([
-        Hero.create({ name: 'Kyrue', roleId: adventurer.id }),
-        Hero.create({ name: 'Cree', roleId: elf.id }),
+        Hero.create({ name: 'Kai', roleId: adventurer.id }),
+        Hero.create({ name: 'Zeela', roleId: elf.id }),
         Hero.create({ name: 'Raphael', roleId: angel.id }),
         Hero.create({ name: 'Hyojin', roleId: assassin.id }),
-        Hero.create({ name: 'Hank', roleId: tank.id })
+        Hero.create({ name: 'Cree', roleId: hunter.id })
     ]);
 };
 
