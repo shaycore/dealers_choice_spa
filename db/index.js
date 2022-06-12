@@ -49,7 +49,7 @@ Hero.belongsTo(Role);
 
 const syncAndSeed = async() => {
     await conn.sync({ force: true });
-    const [ adventurer, angel, assassin, demon, elf, tank, vampire, cleric, ogre, hunter  ] = await Promise.all([
+    const [ adventurer, angel, assassin, demon, elf, tank, vampire, cleric, ogre, hunter, mystic  ] = await Promise.all([
         Role.create({ name: 'Adventurer', attack: 7, defense: 7, agility: 6 }),
         Role.create({ name: 'Angel', agility: 9, magic: 8, attack: 2 }),
         Role.create({ name: 'Assassin', agility: 10, defense: 2, attack: 6 }),
@@ -59,7 +59,8 @@ const syncAndSeed = async() => {
         Role.create({ name: 'Vampire', attack: 9, agility: 8, defense: 3 }),
         Role.create({ name: 'Cleric', magic: 8, defense: 10, intelligence: 8, attack: 2, agility: 2 }),
         Role.create({ name: 'Ogre', agility: 3, magic: 7, attack: 8 }),
-        Role.create({ name: 'Hunter', agility: 8, attack: 7, defense: 2, intelligence: 7 })
+        Role.create({ name: 'Hunter', agility: 8, attack: 7, defense: 2, intelligence: 7 }),
+        Role.create({ name: 'Mystic', agility: 2, attack: 4, magic: 7, intelligence: 10 })
     ]);
     const [ kyrue, cree, raphael, hyojin, Hank] = await Promise.all([
         Hero.create({ name: 'Kai', roleId: adventurer.id }),
