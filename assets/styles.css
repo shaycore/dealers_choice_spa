@@ -1,0 +1,17 @@
+body {
+    font-family: verdana;
+}
+
+#hero-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#hero-list > li {
+    display: flex;
+    flex-direction: column;
+}
+
+#warning {
+    color: red;
+}

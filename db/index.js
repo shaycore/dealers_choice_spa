@@ -25,12 +25,7 @@ const Role = conn.define('role', {
     }
 });
 
-const Party = conn.define('party', {
-
-});
-
 Hero.belongsTo(Role);
-Party.belongsTo(Hero);
 
 const syncAndSeed = async() => {
     await conn.sync({ force: true });
@@ -41,6 +36,7 @@ const syncAndSeed = async() => {
         Role.create({ name: 'Demon' }),
         Role.create({ name: 'Elf' }),
         Role.create({ name: 'Tank' }),
+        Role.create({ name: 'Vampire' }),
         Role.create({ name: 'Wizard' })
     ]);
     const [ kyrue, cree, raphael, hyojin, Hank] = await Promise.all([
@@ -49,11 +45,6 @@ const syncAndSeed = async() => {
         Hero.create({ name: 'Raphael', roleId: angel.id }),
         Hero.create({ name: 'Hyojin', roleId: assassin.id }),
         Hero.create({ name: 'Hank', roleId: tank.id })
-    ]);
-    await Promise.all([
-        Party.create({ heroId: kyrue.id }),
-        Party.create({ heroId: hyojin.id }),
-        Party.create({ heroId: Hank.id })
     ]);
 };
 
