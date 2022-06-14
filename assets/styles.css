@@ -24,6 +24,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: .5rem;
 }
 
 li > * {
@@ -47,6 +48,9 @@ form > * {
     padding: .25rem;
 }
 
+.selected {
+    border: 1px dotted black;
+}
 
 .tooltip {
     position: relative;
@@ -112,7 +116,6 @@ form > * {
     50% { border-color: orange }
 }
 
-
 .css-typing p {
     border-right: .15em solid orange;
     font-family: "Courier";
@@ -140,10 +143,10 @@ form > * {
 }
   
 .css-typing p:nth-child(3) {
-    width: 7.3em;
+    width: 10rem;
     opacity: 0;
-    -webkit-animation: type3 5s steps(20, end);
-    animation: type3 5s steps(20, end), blink .5s step-end infinite alternate;
+    -webkit-animation: type3 2s steps(20, end);
+    animation: type3 10s steps(20, end), blink .5s step-end infinite alternate;
     -webkit-animation-delay: 4s;
     animation-delay: 20s;
     -webkit-animation-fill-mode: forwards;

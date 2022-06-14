@@ -7,13 +7,16 @@ const dropdown = document.querySelector('#role');
 const warning = document.querySelector('#warning');
 const state = {};
 
+window.addEventListener('hashchange', async()=> {
+    renderHeroes();
+});
 
 heroForm.addEventListener('submit', async(ev)=> {
     ev.preventDefault();
     const name = input.value;
     const role = dropdown.value;
     const partySize = state.heroes.length;
-    const maxPartySize = 5;
+    const maxPartySize = 7;
     try {
         if (partySize < maxPartySize) {
             await axios.post('/api/heroes', {
@@ -56,11 +59,12 @@ const renderRoles = () => {
 };
 
 const renderHeroes = ()=> {
+    const id = window.location.hash.slice(1)*1;
     const html = state.heroes.map( hero => {
     const role = state.roles.find( role => role.id === hero.roleId );
         return `
-            <li>
-                <img src="/assets/${ role.name }.png" class="role-img">
+            <li class='${ hero.id === id ? 'selected' : '' }'> 
+                <a href='#${hero.id}'><img src="/assets/${ role.name }.png" class="role-img"></a>
                 Name: ${ hero.name }
                 <div class="tooltip">Role: <b>${ role.name }</b>
                     <span class="tooltiptext">
@@ -88,10 +92,6 @@ const fetchHeroes = async() => {
     data = response.data;
     state.heroes = data;
     renderHeroes();
-
-
-
-
 };
 
 const bootstrap = async() => {
