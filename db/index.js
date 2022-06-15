@@ -23,6 +23,10 @@ const Role = conn.define('role', {
           notEmpty: true
         }
     },
+    description: {
+        type: STRING,
+        defaultValue: "A cool addition to your party!"
+    },
     attack: {
         type: INTEGER,
         defaultValue: 5

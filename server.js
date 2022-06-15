@@ -28,6 +28,15 @@ app.get('/api/roles', async(req, res, next)=>{
     }
 });
 
+app.get('/api/roles/:id', async(req, res, next)=> {
+    try {
+      res.send(await Role.findAll({ where: { id: req.params.id }}));
+    }
+    catch(ex){
+      next(ex);
+    }
+});
+
 //Routes to Add and Delete Heroes
 app.post('/api/heroes', async(req, res, next)=> {
     try {

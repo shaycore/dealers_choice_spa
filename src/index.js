@@ -5,10 +5,12 @@ const heroList = document.querySelector('#hero-list');
 const input = document.querySelector('input');
 const dropdown = document.querySelector('#role');
 const warning = document.querySelector('#warning');
+const information = document.querySelector('#information');
+
 const state = {};
 
 window.addEventListener('hashchange', async()=> {
-    renderHeroes();
+    fetchHeroes();
 });
 
 heroForm.addEventListener('submit', async(ev)=> {
@@ -64,6 +66,7 @@ const renderHeroes = ()=> {
     const role = state.roles.find( role => role.id === hero.roleId );
         return `
             <li class='${ hero.id === id ? 'selected' : '' }'> 
+                ${ hero.id === id ? '<b>Party Leader!</b>' : '' }
                 <a href='#${hero.id}'><img src="/assets/${ role.name }.png" class="role-img"></a>
                 Name: ${ hero.name }
                 <div class="tooltip">Role: <b>${ role.name }</b>
@@ -83,18 +86,23 @@ const renderHeroes = ()=> {
     heroList.innerHTML = html;
 };
 
-const fetchHeroes = async() => {
+const fetchRoles = async() => {
     let response = await axios.get('/api/roles');
     let data = response.data;
     state.roles = data;
-    renderRoles();
+    renderRoles();  
+};
+
+const fetchHeroes = async() => {
     response = await axios.get('/api/heroes');
     data = response.data;
     state.heroes = data;
     renderHeroes();
 };
 
-const bootstrap = async() => {
+const start = async() => {
+    fetchRoles();
+    fetchHeroes();
 };
 
-fetchHeroes();
+start();
